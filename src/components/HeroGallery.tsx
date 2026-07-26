@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const rowOne = [
   "from-slate-800 via-blue-900 to-slate-950",
@@ -18,9 +18,14 @@ const SWAP_DISTANCE = 296;
 
 export default function HeroGallery() {
   const [swapped, setSwapped] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     function onWheel(e: WheelEvent) {
+      const rect = containerRef.current?.getBoundingClientRect();
+      const inView = rect && rect.top < window.innerHeight && rect.bottom > 0;
+      if (!inView) return;
+
       if (e.deltaY > 0 && !swapped) {
         e.preventDefault();
         setSwapped(true);
@@ -35,7 +40,10 @@ export default function HeroGallery() {
   }, [swapped]);
 
   return (
-    <div className="flex h-[calc(100vh-5rem)] w-full items-center justify-center px-20">
+    <div
+      ref={containerRef}
+      className="flex h-[calc(100vh-5rem)] w-full items-center justify-center px-20"
+    >
       <div className="w-fit">
         <div
           className="flex gap-x-72 transition-transform duration-700 ease-in-out"
