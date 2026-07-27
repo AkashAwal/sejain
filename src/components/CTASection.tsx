@@ -3,9 +3,9 @@ import Button from "@/components/Button";
 export default function CTASection() {
   return (
     <section className="w-full bg-black py-24">
-      <div className="mx-auto flex w-full max-w-7xl flex-col items-center px-10 text-center">
+      <div className="mx-auto flex w-full max-w-7xl flex-col items-center px-6 sm:px-10 text-center">
         <p className="text-sm font-semibold uppercase tracking-widest text-accent">
-          (Get Started)
+          Get Started
         </p>
         <h2 className="mt-4 max-w-3xl text-4xl font-bold uppercase leading-tight text-white sm:text-5xl">
           Ready to bring your vision to canvas?

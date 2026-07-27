@@ -1,0 +1,12 @@
+/* TEAM */
+Artist & Mentor: Seema Jabin Husain
+Studio: Sejain Art Studio & Academy
+Location: Malviya Nagar, New Delhi, India
+Contact: contact@sejain.in
+
+/* SITE */
+Last update: 2026
+Language: English
+Doctype: HTML5
+Components: Next.js, React, Tailwind CSS
+Site developed by: Akash Awal (https://akashawal.com)

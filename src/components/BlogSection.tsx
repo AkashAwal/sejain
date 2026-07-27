@@ -4,9 +4,9 @@ import { blogPosts } from "@/data/blogPosts";
 
 export default function BlogSection() {
   return (
-    <section className="mx-auto w-full max-w-7xl px-10 py-24">
+    <section className="mx-auto w-full max-w-7xl px-6 sm:px-10 py-24">
       <p className="text-sm font-semibold uppercase tracking-widest text-primary">
-        (Blog)
+        Blog
       </p>
       <h2 className="mt-4 text-4xl font-bold uppercase leading-tight text-black sm:text-5xl">
         Stories from the studio.

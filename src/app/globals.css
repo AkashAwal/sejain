@@ -22,6 +22,11 @@ body {
   color: var(--foreground);
 }
 
+::selection {
+  background: var(--accent);
+  color: #fff;
+}
+
 @keyframes dot-fill {
   from {
     transform: scaleX(0);

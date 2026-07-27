@@ -41,9 +41,9 @@ export default function ArtGridSection() {
   );
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-10 py-24">
+    <section className="mx-auto w-full max-w-7xl px-6 sm:px-10 py-24">
       <p className="text-sm font-semibold uppercase tracking-widest text-primary">
-        (Shop)
+        Shop
       </p>
       <h2 className="mt-4 text-4xl font-bold uppercase leading-tight text-black sm:text-5xl">
         Original artwork, ready to collect.
@@ -57,7 +57,7 @@ export default function ArtGridSection() {
               rowRefs.current[i] = el;
             }}
             data-row={i}
-            className={`grid grid-cols-2 gap-8 transition-all duration-700 ease-out ${
+            className={`grid grid-cols-2 gap-3 transition-all duration-700 ease-out sm:gap-8 ${
               revealed[i] ? "scale-100 opacity-100" : "scale-90 opacity-0"
             }`}
           >

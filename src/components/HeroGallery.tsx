@@ -13,12 +13,25 @@ const rowTwo = [
   "from-teal-500 via-cyan-400 to-fuchsia-600",
 ];
 
-// row height (w-48 at aspect-[3/4] = 256px) + the mt-10 gap (40px) between rows
-const SWAP_DISTANCE = 296;
-
 export default function HeroGallery() {
   const [swapped, setSwapped] = useState(false);
+  const [swapDistance, setSwapDistance] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const rowOneRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function measure() {
+      const row = rowOneRef.current;
+      if (!row) return;
+      // row height + the gap between rows (mt-6/mt-10)
+      const gap = window.innerWidth >= 640 ? 40 : 24;
+      setSwapDistance(row.offsetHeight + gap);
+    }
+
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
 
   useEffect(() => {
     function onWheel(e: WheelEvent) {
@@ -42,28 +55,29 @@ export default function HeroGallery() {
   return (
     <div
       ref={containerRef}
-      className="flex h-[calc(100vh-5rem)] w-full items-center justify-center px-20"
+      className="flex h-[calc(100vh-5rem)] w-full items-center justify-center px-6 sm:px-10 md:px-20"
     >
       <div className="w-fit">
         <div
-          className="flex gap-x-72 transition-transform duration-700 ease-in-out"
-          style={{ transform: `translateY(${swapped ? SWAP_DISTANCE : 0}px)` }}
+          ref={rowOneRef}
+          className="flex gap-x-4 transition-transform duration-700 ease-in-out sm:gap-x-10 md:gap-x-24 lg:gap-x-72"
+          style={{ transform: `translateY(${swapped ? swapDistance : 0}px)` }}
         >
           {rowOne.map((gradient, i) => (
             <div
               key={`row1-${i}`}
-              className={`aspect-[3/4] w-48 shrink-0 bg-gradient-to-br ${gradient}`}
+              className={`aspect-[3/4] w-16 shrink-0 bg-gradient-to-br sm:w-24 md:w-32 lg:w-48 ${gradient}`}
             />
           ))}
         </div>
         <div
-          className="ml-60 mt-10 flex gap-x-72 transition-transform duration-700 ease-in-out"
-          style={{ transform: `translateY(${swapped ? -SWAP_DISTANCE : 0}px)` }}
+          className="ml-8 mt-6 flex gap-x-4 transition-transform duration-700 ease-in-out sm:ml-20 sm:mt-10 sm:gap-x-10 md:ml-28 md:gap-x-24 lg:ml-60 lg:gap-x-72"
+          style={{ transform: `translateY(${swapped ? -swapDistance : 0}px)` }}
         >
           {rowTwo.map((gradient, i) => (
             <div
               key={`row2-${i}`}
-              className={`aspect-[3/4] w-48 shrink-0 bg-gradient-to-br ${gradient}`}
+              className={`aspect-[3/4] w-16 shrink-0 bg-gradient-to-br sm:w-24 md:w-32 lg:w-48 ${gradient}`}
             />
           ))}
         </div>

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import HeroGallery from "@/components/HeroGallery";
 import SplitLogoReveal from "@/components/SplitLogoReveal";
 import ArtistIntro from "@/components/ArtistIntro";
@@ -8,6 +9,10 @@ import ScrollZoomImage from "@/components/ScrollZoomImage";
 import ArtGridSection from "@/components/ArtGridSection";
 import BlogSection from "@/components/BlogSection";
 import CTASection from "@/components/CTASection";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
 
 export default function Home() {
   return (

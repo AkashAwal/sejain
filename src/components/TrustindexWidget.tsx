@@ -37,7 +37,7 @@ export default function TrustindexWidget() {
     let observer: ResizeObserver | null = null;
 
     // The widget's content loads async inside the iframe, so its <body>
-    // doesn't exist yet at mount — poll briefly just to attach the
+    // doesn't exist yet at mount - poll briefly just to attach the
     // ResizeObserver once it appears, then let the observer (not a timer)
     // track height for as long as the widget keeps resizing itself.
     const attach = setInterval(() => {

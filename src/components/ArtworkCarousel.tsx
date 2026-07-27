@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const gradients = [
   "from-slate-800 via-blue-900 to-slate-950",
@@ -13,15 +13,26 @@ const gradients = [
   "from-indigo-900 via-indigo-500 to-sky-200",
 ];
 
-const VISIBLE = 4;
 const COUNT = gradients.length;
 const SLIDE_MS = 3000;
-const extended = [
-  ...gradients.slice(-VISIBLE),
-  ...gradients,
-  ...gradients.slice(0, VISIBLE),
-];
-const itemPercent = 100 / extended.length;
+
+function useVisibleCount() {
+  const [visible, setVisible] = useState(4);
+
+  useEffect(() => {
+    function update() {
+      const w = window.innerWidth;
+      if (w < 640) setVisible(1);
+      else if (w < 1024) setVisible(2);
+      else setVisible(4);
+    }
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  return visible;
+}
 
 function ChevronIcon({ direction }: { direction: "left" | "right" }) {
   return (
@@ -40,11 +51,25 @@ function ChevronIcon({ direction }: { direction: "left" | "right" }) {
 }
 
 export default function ArtworkCarousel() {
-  const [pos, setPos] = useState(VISIBLE);
+  const visible = useVisibleCount();
+  const [pos, setPos] = useState(visible);
   const [instant, setInstant] = useState(false);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const activeDot = ((pos - VISIBLE) % COUNT + COUNT) % COUNT;
+  const extended = useMemo(
+    () => [...gradients.slice(-visible), ...gradients, ...gradients.slice(0, visible)],
+    [visible],
+  );
+  const itemPercent = 100 / extended.length;
+
+  // Re-anchor the position whenever the visible slide count changes
+  // (breakpoint change), since the clone-array math depends on it.
+  useEffect(() => {
+    setInstant(true);
+    setPos(visible);
+  }, [visible]);
+
+  const activeDot = ((pos - visible) % COUNT + COUNT) % COUNT;
 
   useEffect(() => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -58,12 +83,12 @@ export default function ArtworkCarousel() {
   }, [pos]);
 
   function handleTransitionEnd() {
-    if (pos >= VISIBLE + COUNT) {
+    if (pos >= visible + COUNT) {
       setInstant(true);
-      setPos(VISIBLE);
-    } else if (pos < VISIBLE) {
+      setPos(visible);
+    } else if (pos < visible) {
       setInstant(true);
-      setPos(VISIBLE + COUNT - 1);
+      setPos(visible + COUNT - 1);
     }
   }
 
@@ -73,12 +98,12 @@ export default function ArtworkCarousel() {
   }
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-10 py-24">
+    <section className="mx-auto w-full max-w-7xl px-6 sm:px-10 py-24">
       <div className="relative overflow-hidden">
         <div
           className={`flex ${instant ? "" : "transition-transform duration-700 ease-in-out"}`}
           style={{
-            width: `${(extended.length / VISIBLE) * 100}%`,
+            width: `${(extended.length / visible) * 100}%`,
             transform: `translateX(-${pos * itemPercent}%)`,
           }}
           onTransitionEnd={handleTransitionEnd}
@@ -117,7 +142,7 @@ export default function ArtworkCarousel() {
           <button
             type="button"
             key={i}
-            onClick={() => goTo(VISIBLE + i)}
+            onClick={() => goTo(visible + i)}
             aria-label={`Go to slide ${i + 1}`}
             className={`relative h-2 overflow-hidden rounded-full bg-black/15 transition-[width] duration-300 ${
               i === activeDot ? "w-10" : "w-2"

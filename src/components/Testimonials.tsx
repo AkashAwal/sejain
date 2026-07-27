@@ -7,10 +7,10 @@ export default function Testimonials() {
   return (
     <section
       id="testimonials"
-      className="mx-auto w-full max-w-7xl px-10 py-24"
+      className="mx-auto w-full max-w-7xl px-6 sm:px-10 py-24"
     >
       <p className="text-sm font-semibold uppercase tracking-widest text-primary">
-        (Testimonials)
+        Testimonials
       </p>
       <h2 className="mt-4 text-4xl font-bold uppercase leading-tight text-black sm:text-5xl">
         What collectors and students are saying.
