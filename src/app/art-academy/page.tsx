@@ -145,7 +145,7 @@ export default function ArtAcademyPage() {
         </h1>
         <p className="mt-6 max-w-xl text-lg text-zinc-600">
           Get practical learning and increase your skills from a seasoned
-          artist's expertise - fully offline, one-on-one, in our Malviya
+          artist&rsquo;s expertise - fully offline, one-on-one, in our Malviya
           Nagar studio.
         </p>
         <Button href="#classes" className="mt-8 inline-flex">
@@ -259,7 +259,7 @@ export default function ArtAcademyPage() {
           teachers can closely observe, guide, and correct your technique.
           With real-time feedback and an immersive atmosphere, offline
           classes help build confidence, refine skills, and provide a truly
-          inspiring art journey that's impossible to match online.
+          inspiring art journey that&rsquo;s impossible to match online.
         </p>
       </section>
 

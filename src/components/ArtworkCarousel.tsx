@@ -61,6 +61,7 @@ export default function ArtworkCarousel() {
   const visible = useVisibleCount();
   const [pos, setPos] = useState(visible);
   const [instant, setInstant] = useState(false);
+  const [prevVisible, setPrevVisible] = useState(visible);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const extended = useMemo(
@@ -74,11 +75,14 @@ export default function ArtworkCarousel() {
   const itemPercent = 100 / extended.length;
 
   // Re-anchor the position whenever the visible slide count changes
-  // (breakpoint change), since the clone-array math depends on it.
-  useEffect(() => {
+  // (breakpoint change), since the clone-array math depends on it. Adjusted
+  // during render (React's recommended reset-on-prop-change pattern) rather
+  // than in an effect, since this must happen before the browser paints.
+  if (visible !== prevVisible) {
+    setPrevVisible(visible);
     setInstant(true);
     setPos(visible);
-  }, [visible]);
+  }
 
   const activeDot = ((pos - visible) % COUNT + COUNT) % COUNT;
 

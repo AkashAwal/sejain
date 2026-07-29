@@ -71,28 +71,26 @@ export default function Header() {
   const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const lastY = useRef(0);
+  const lastHidden = useRef(false);
 
   useEffect(() => {
     function onScroll() {
       const y = window.scrollY;
-      if (y < 80) {
-        setHidden(false);
-      } else if (y > lastY.current) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
+      const next = y < 80 ? false : y > lastY.current;
       lastY.current = y;
+
+      setHidden(next);
+      // Close the mobile menu whenever the header's hidden state actually
+      // flips, rather than reacting to `hidden` in a separate effect.
+      if (next !== lastHidden.current) {
+        lastHidden.current = next;
+        setMobileOpen(false);
+      }
     }
 
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  useEffect(() => {
-    if (mobileOpen) setMobileOpen(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hidden]);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";

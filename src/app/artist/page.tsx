@@ -65,7 +65,7 @@ export default function ArtistPage() {
             An award-winning artist with 25+ years of experience across
             painting, illustration, and teaching, Seema Jabin Husain leads
             Sejain Art Studio & Academy - a welcoming space for anyone who
-            loves art, whether you're commissioning a custom piece, joining a
+            loves art, whether you&rsquo;re commissioning a custom piece, joining a
             class, or exploring the gallery.
           </p>
           <Button href="/contact" className="mt-8 inline-flex">

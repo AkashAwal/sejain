@@ -1,3 +1,4 @@
+import Link from "next/link";
 import Button from "@/components/Button";
 
 export default function CTASection() {
@@ -17,12 +18,12 @@ export default function CTASection() {
 
         <div className="mt-10 flex flex-wrap items-center justify-center gap-6">
           <Button href="/contact">Get in Touch</Button>
-          <a
+          <Link
             href="/gallery"
             className="text-sm font-semibold uppercase tracking-wide text-white underline-offset-4 hover:underline"
           >
             View Gallery
-          </a>
+          </Link>
         </div>
       </div>
     </section>

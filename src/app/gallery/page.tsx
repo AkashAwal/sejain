@@ -23,7 +23,7 @@ export default function GalleryPage() {
         </h1>
         <p className="mt-6 max-w-xl text-xl text-zinc-600">
           Every piece here is one of a kind - no prints, no editions. Once a
-          painting sells, it's gone for good. Don't see what you're looking
+          painting sells, it&rsquo;s gone for good. Don&rsquo;t see what you&rsquo;re looking
           for?{" "}
           <Link
             href="/commissions"

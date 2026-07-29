@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Button from "@/components/Button";
 
 export const metadata: Metadata = {
@@ -27,12 +28,12 @@ export default function NotFound() {
 
         <div className="flex flex-wrap items-center justify-center gap-6">
           <Button href="/">Back to Home</Button>
-          <a
+          <Link
             href="/gallery"
             className="text-sm font-semibold uppercase tracking-wide text-primary underline-offset-4 hover:underline"
           >
             View Gallery
-          </a>
+          </Link>
         </div>
       </div>
     </main>
