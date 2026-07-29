@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
 import CTASection from "@/components/CTASection";
+import EnquireButton from "@/components/EnquireButton";
 
 export const metadata: Metadata = {
   title: "Art Academy",
@@ -150,6 +152,18 @@ export default function ArtAcademyPage() {
           View Classes
         </Button>
 
+        <div className="relative mt-12 w-full overflow-hidden bg-gradient-to-br from-slate-800 via-blue-900 to-slate-950">
+          <Image
+            src="/art-academy-hero.webp"
+            alt="Students painting together at Sejain Art Academy"
+            width={1600}
+            height={900}
+            sizes="100vw"
+            priority
+            className="h-auto w-full"
+          />
+        </div>
+
         <p className="mt-12 text-sm font-semibold uppercase tracking-widest text-primary">
           Learn different art forms including
         </p>
@@ -195,14 +209,14 @@ export default function ArtAcademyPage() {
                   </li>
                 ))}
               </ul>
-              <Button
-                href={`/contact?reason=${encodeURIComponent("Art Academy classes")}&message=${encodeURIComponent(
-                  `I'd like to enroll in the ${course.title} course.`,
-                )}`}
+              <EnquireButton
+                subject={`${course.title} Course`}
+                message={`I'd like to enroll in the ${course.title} course.`}
+                reason="Art Academy classes"
                 className="mt-2 inline-flex self-start"
               >
                 Enroll
-              </Button>
+              </EnquireButton>
             </div>
           ))}
         </div>
@@ -233,7 +247,7 @@ export default function ArtAcademyPage() {
         </div>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-10">
+      <section className="mx-auto w-full max-w-7xl px-6 py-12 sm:px-10 sm:py-24">
         <p className="text-sm font-semibold uppercase tracking-widest text-primary">
           Offline vs Online
         </p>
@@ -249,9 +263,17 @@ export default function ArtAcademyPage() {
         </p>
       </section>
 
-      <section className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-10">
+      <section className="mx-auto w-full max-w-7xl px-6 py-12 sm:px-10 sm:py-24">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[480px_1fr] lg:items-center">
-          <div className="aspect-[4/5] w-full bg-gradient-to-br from-slate-800 via-blue-900 to-slate-950" />
+          <div className="relative mx-auto aspect-[4/5] w-full max-w-xs overflow-hidden bg-gradient-to-br from-slate-800 via-blue-900 to-slate-950 lg:mx-0">
+            <Image
+              src="/artist.webp"
+              alt="Seema Jabin Husain"
+              fill
+              sizes="20rem"
+              className="object-cover"
+            />
+          </div>
 
           <div>
             <p className="text-sm font-semibold uppercase tracking-widest text-primary">

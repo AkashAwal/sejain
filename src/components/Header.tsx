@@ -176,7 +176,9 @@ export default function Header() {
             </NavLink>
           ))}
           <div className="mt-3 sm:hidden">
-            <Button href="/contact">Contact</Button>
+            <Button href="/contact" onClick={() => setMobileOpen(false)}>
+              Contact
+            </Button>
           </div>
         </nav>
       </div>

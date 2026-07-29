@@ -1,17 +1,19 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { artworks } from "@/data/artworks";
 
-const rowOne = [
-  "from-slate-800 via-blue-900 to-slate-950",
-  "from-neutral-800 via-neutral-600 to-neutral-300",
-  "from-sky-900 via-slate-200 to-white",
-];
+const rowOneSlugs = ["chishtis-tomb", "gate-of-serenity", "gateways-of-glory"];
+const rowTwoSlugs = ["golden-jharokha", "stone-and-sky"];
 
-const rowTwo = [
-  "from-lime-100 via-neutral-500 to-neutral-900",
-  "from-teal-500 via-cyan-400 to-fuchsia-600",
-];
+const rowOne = rowOneSlugs.map(
+  (slug) => artworks.find((a) => a.slug === slug)!,
+);
+const rowTwo = rowTwoSlugs.map(
+  (slug) => artworks.find((a) => a.slug === slug)!,
+);
 
 export default function HeroGallery() {
   const [swapped, setSwapped] = useState(false);
@@ -55,7 +57,7 @@ export default function HeroGallery() {
   return (
     <div
       ref={containerRef}
-      className="flex h-[calc(100vh-5rem)] w-full items-center justify-center px-6 sm:px-10 md:px-20"
+      className="hidden h-[calc(100vh-5rem)] w-full items-center justify-center px-6 sm:flex sm:px-10 md:px-20"
     >
       <div className="w-fit">
         <div
@@ -63,22 +65,44 @@ export default function HeroGallery() {
           className="flex gap-x-4 transition-transform duration-700 ease-in-out sm:gap-x-10 md:gap-x-24 lg:gap-x-72"
           style={{ transform: `translateY(${swapped ? swapDistance : 0}px)` }}
         >
-          {rowOne.map((gradient, i) => (
-            <div
-              key={`row1-${i}`}
-              className={`aspect-[3/4] w-16 shrink-0 bg-gradient-to-br sm:w-24 md:w-32 lg:w-48 ${gradient}`}
-            />
+          {rowOne.map((art) => (
+            <Link
+              key={art.slug}
+              href={`/gallery/${art.slug}`}
+              className={`relative aspect-[3/4] w-16 shrink-0 overflow-hidden bg-gradient-to-br sm:w-24 md:w-32 lg:w-48 ${art.gradient}`}
+            >
+              {art.image && (
+                <Image
+                  src={art.image}
+                  alt={art.name}
+                  fill
+                  sizes="(min-width: 1024px) 12rem, (min-width: 640px) 6rem, 4rem"
+                  className="object-cover"
+                />
+              )}
+            </Link>
           ))}
         </div>
         <div
           className="ml-8 mt-6 flex gap-x-4 transition-transform duration-700 ease-in-out sm:ml-20 sm:mt-10 sm:gap-x-10 md:ml-28 md:gap-x-24 lg:ml-60 lg:gap-x-72"
           style={{ transform: `translateY(${swapped ? -swapDistance : 0}px)` }}
         >
-          {rowTwo.map((gradient, i) => (
-            <div
-              key={`row2-${i}`}
-              className={`aspect-[3/4] w-16 shrink-0 bg-gradient-to-br sm:w-24 md:w-32 lg:w-48 ${gradient}`}
-            />
+          {rowTwo.map((art) => (
+            <Link
+              key={art.slug}
+              href={`/gallery/${art.slug}`}
+              className={`relative aspect-[3/4] w-16 shrink-0 overflow-hidden bg-gradient-to-br sm:w-24 md:w-32 lg:w-48 ${art.gradient}`}
+            >
+              {art.image && (
+                <Image
+                  src={art.image}
+                  alt={art.name}
+                  fill
+                  sizes="(min-width: 1024px) 12rem, (min-width: 640px) 6rem, 4rem"
+                  className="object-cover"
+                />
+              )}
+            </Link>
           ))}
         </div>
       </div>

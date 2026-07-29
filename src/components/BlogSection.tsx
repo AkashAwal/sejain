@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Button from "@/components/Button";
+import BlogCover from "@/components/BlogCover";
 import { blogPosts } from "@/data/blogPosts";
 
 export default function BlogSection() {
@@ -13,10 +14,11 @@ export default function BlogSection() {
       </h2>
 
       <div className="mt-12 grid grid-cols-1 gap-10 md:grid-cols-3">
-        {blogPosts.map((post) => (
+        {blogPosts.map((post, i) => (
           <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
-            <div
-              className={`relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br transition-transform duration-500 group-hover:scale-[1.02] ${post.gradient}`}
+            <BlogCover
+              index={i + 1}
+              className="aspect-[4/3] w-full transition-transform duration-500 group-hover:scale-[1.02]"
             />
             <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-primary">
               {post.category} · {post.date}

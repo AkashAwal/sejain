@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { artworks } from "@/data/artworks";
 
@@ -56,7 +57,17 @@ export default function GalleryGrid() {
                 className={`relative w-full overflow-hidden bg-gradient-to-br transition-transform duration-500 group-hover:scale-[1.02] ${art.gradient} ${
                   art.tall ? "aspect-[3/4]" : "aspect-[4/3]"
                 }`}
-              />
+              >
+                {art.image && (
+                  <Image
+                    src={art.image}
+                    alt={art.name}
+                    fill
+                    sizes="(min-width: 640px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                )}
+              </div>
               <div className="mt-3 flex items-baseline justify-between">
                 <p className="font-semibold text-black">{art.name}</p>
                 <p className="text-zinc-600">{art.price}</p>

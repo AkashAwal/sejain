@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Button from "@/components/Button";
 import CTASection from "@/components/CTASection";
 import Timeline from "@/components/Timeline";
@@ -72,7 +73,16 @@ export default function ArtistPage() {
           </Button>
         </div>
 
-        <div className="aspect-[4/5] w-full bg-gradient-to-br from-slate-800 via-blue-900 to-slate-950" />
+        <div className="relative aspect-[4/5] w-full max-w-xs justify-self-center overflow-hidden bg-gradient-to-br from-slate-800 via-blue-900 to-slate-950 lg:justify-self-end">
+          <Image
+            src="/artist.webp"
+            alt="Seema Jabin Husain"
+            fill
+            sizes="20rem"
+            priority
+            className="object-cover"
+          />
+        </div>
       </section>
 
       <section className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-10">

@@ -1,19 +1,26 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { artworks } from "@/data/artworks";
 
-const gradients = [
-  "from-slate-800 via-blue-900 to-slate-950",
-  "from-neutral-800 via-neutral-600 to-neutral-300",
-  "from-sky-900 via-slate-200 to-white",
-  "from-lime-100 via-neutral-500 to-neutral-900",
-  "from-teal-500 via-cyan-400 to-fuchsia-600",
-  "from-rose-900 via-rose-500 to-orange-200",
-  "from-emerald-900 via-emerald-500 to-lime-200",
-  "from-indigo-900 via-indigo-500 to-sky-200",
+// Already featured in the hero section, or excluded per request.
+const EXCLUDED_SLUGS = [
+  "the-gateway",
+  "chishtis-tomb",
+  "gate-of-serenity",
+  "gateways-of-glory",
+  "golden-jharokha",
+  "stone-and-sky",
+  "puddle",
 ];
 
-const COUNT = gradients.length;
+const carouselArtworks = artworks.filter(
+  (art) => !EXCLUDED_SLUGS.includes(art.slug),
+);
+
+const COUNT = carouselArtworks.length;
 const SLIDE_MS = 3000;
 
 function useVisibleCount() {
@@ -57,7 +64,11 @@ export default function ArtworkCarousel() {
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const extended = useMemo(
-    () => [...gradients.slice(-visible), ...gradients, ...gradients.slice(0, visible)],
+    () => [
+      ...carouselArtworks.slice(-visible),
+      ...carouselArtworks,
+      ...carouselArtworks.slice(0, visible),
+    ],
     [visible],
   );
   const itemPercent = 100 / extended.length;
@@ -98,7 +109,7 @@ export default function ArtworkCarousel() {
   }
 
   return (
-    <section className="mx-auto w-full max-w-7xl px-6 sm:px-10 py-24">
+    <section className="mx-auto w-full max-w-7xl px-6 py-12 sm:px-10 sm:py-24">
       <div className="relative overflow-hidden">
         <div
           className={`flex ${instant ? "" : "transition-transform duration-700 ease-in-out"}`}
@@ -108,13 +119,26 @@ export default function ArtworkCarousel() {
           }}
           onTransitionEnd={handleTransitionEnd}
         >
-          {extended.map((gradient, i) => (
+          {extended.map((art, i) => (
             <div
-              key={i}
+              key={`${art.slug}-${i}`}
               className="shrink-0 px-3"
               style={{ width: `${100 / extended.length}%` }}
             >
-              <div className={`aspect-[3/4] w-full bg-gradient-to-br ${gradient}`} />
+              <Link
+                href={`/gallery/${art.slug}`}
+                className={`relative block aspect-[3/4] w-full overflow-hidden bg-gradient-to-br ${art.gradient}`}
+              >
+                {art.image && (
+                  <Image
+                    src={art.image}
+                    alt={art.name}
+                    fill
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    className="object-cover"
+                  />
+                )}
+              </Link>
             </div>
           ))}
         </div>
@@ -138,7 +162,7 @@ export default function ArtworkCarousel() {
       </div>
 
       <div className="mt-8 flex items-center justify-center gap-3">
-        {gradients.map((_, i) => (
+        {carouselArtworks.map((_, i) => (
           <button
             type="button"
             key={i}

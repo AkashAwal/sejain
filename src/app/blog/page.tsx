@@ -1,13 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import BlogCover from "@/components/BlogCover";
 import CTASection from "@/components/CTASection";
 import { blogPosts } from "@/data/blogPosts";
 
+const description =
+  "Notes from Sejain Art Studio & Academy on technique, teaching, and the process behind commissioned work.";
+
 export const metadata: Metadata = {
   title: "Blog",
-  description:
-    "Notes from Sejain Art Studio & Academy on technique, teaching, and the process behind commissioned work.",
+  description,
   alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Blog",
+    description,
+    images: [{ url: "/blog/cover.webp", width: 1200, height: 630, alt: "Sejain's Insights" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog",
+    description,
+    images: ["/blog/cover.webp"],
+  },
 };
 
 export default function BlogIndexPage() {
@@ -31,8 +45,11 @@ export default function BlogIndexPage() {
       {featured && (
         <section className="mx-auto w-full max-w-7xl px-6 sm:px-10 py-8">
           <Link href={`/blog/${featured.slug}`} className="group grid grid-cols-1 gap-8 md:grid-cols-2 md:items-center">
-            <div
-              className={`relative aspect-[16/10] w-full overflow-hidden bg-gradient-to-br transition-transform duration-500 group-hover:scale-[1.01] ${featured.gradient}`}
+            <BlogCover
+              index={1}
+              showText={false}
+              priority
+              className="aspect-[16/10] w-full transition-transform duration-500 group-hover:scale-[1.01]"
             />
             <div>
               <p className="text-xs font-semibold uppercase tracking-widest text-primary">
@@ -52,10 +69,11 @@ export default function BlogIndexPage() {
 
       <section className="mx-auto w-full max-w-7xl px-6 sm:px-10 py-16">
         <div className="grid grid-cols-1 gap-10 border-t border-black/[.08] pt-16 md:grid-cols-3">
-          {rest.map((post) => (
+          {rest.map((post, i) => (
             <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
-              <div
-                className={`relative aspect-[4/3] w-full overflow-hidden bg-gradient-to-br transition-transform duration-500 group-hover:scale-[1.02] ${post.gradient}`}
+              <BlogCover
+                index={i + 2}
+                className="aspect-[4/3] w-full transition-transform duration-500 group-hover:scale-[1.02]"
               />
               <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-primary">
                 {post.category} · {post.date}

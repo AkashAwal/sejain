@@ -33,7 +33,7 @@ export default function ContactPage() {
 
       <section className="mx-auto w-full max-w-7xl px-6 sm:px-10 py-16">
         <div className="grid grid-cols-1 gap-16 lg:grid-cols-[1fr_1.2fr]">
-          <div className="flex flex-col gap-10">
+          <div className="order-1 lg:col-start-1 lg:row-start-1">
             <div className="flex flex-col gap-6">
               <a
                 href="tel:+918287536480"
@@ -99,27 +99,29 @@ export default function ContactPage() {
                     Studio Hours
                   </p>
                   <p className="mt-1 text-lg text-black">
-                    Tue–Sun, 10 AM–6 PM
+                    Tue–Sun, 11 AM–6 PM
                   </p>
                   <p className="text-sm text-zinc-500">Closed Mondays</p>
                 </div>
               </div>
             </div>
-
-            <div className="aspect-[4/3] w-full overflow-hidden">
-              <iframe
-                title="Sejain Art Studio & Academy location"
-                src="https://www.google.com/maps?q=N+Block,+M73-B,+Malviya+Nagar,+New+Delhi,+Delhi+110017&output=embed"
-                className="h-full w-full border-0 grayscale"
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
           </div>
 
-          <Suspense>
-            <ContactForm />
-          </Suspense>
+          <div className="order-2 lg:col-start-2 lg:row-start-1">
+            <Suspense>
+              <ContactForm />
+            </Suspense>
+          </div>
+
+          <div className="order-3 aspect-[4/3] w-full overflow-hidden lg:col-start-1 lg:row-start-2">
+            <iframe
+              title="Sejain Art Studio & Academy location"
+              src="https://www.google.com/maps?q=N+Block,+M73-B,+Malviya+Nagar,+New+Delhi,+Delhi+110017&output=embed"
+              className="h-full w-full border-0 grayscale"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
         </div>
       </section>
     </main>

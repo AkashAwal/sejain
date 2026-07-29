@@ -1,8 +1,9 @@
+import Image from "next/image";
 import Button from "@/components/Button";
 
 export default function AcademyIntro() {
   return (
-    <section className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-10">
+    <section className="mx-auto w-full max-w-7xl px-6 py-12 sm:px-10 sm:py-24">
       <p className="text-sm font-semibold uppercase tracking-widest text-primary">
         Why Choose Us
       </p>
@@ -11,7 +12,15 @@ export default function AcademyIntro() {
       </h2>
 
       <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[480px_1fr]">
-        <div className="h-full min-h-[560px] w-full bg-gradient-to-br from-neutral-700 via-neutral-500 to-neutral-300" />
+        <div className="relative h-full min-h-[560px] w-full overflow-hidden bg-gradient-to-br from-neutral-700 via-neutral-500 to-neutral-300">
+          <Image
+            src="/academy-intro-homepage.webp"
+            alt="Students painting together at Sejain Art Academy"
+            fill
+            sizes="(min-width: 1024px) 480px, 100vw"
+            className="object-cover"
+          />
+        </div>
 
         <div className="flex flex-col gap-6">
           <div className="grid flex-1 grid-cols-1 gap-6 sm:grid-cols-2">

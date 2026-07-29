@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import MobileHero from "@/components/MobileHero";
 import HeroGallery from "@/components/HeroGallery";
 import SplitLogoReveal from "@/components/SplitLogoReveal";
 import ArtistIntro from "@/components/ArtistIntro";
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main className="w-full">
+      <MobileHero />
       <HeroGallery />
       <SplitLogoReveal />
       <ArtistIntro />

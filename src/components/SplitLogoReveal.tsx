@@ -25,7 +25,7 @@ export default function SplitLogoReveal() {
   return (
     <div
       ref={sectionRef}
-      className="relative flex h-[60vh] w-full items-center justify-center overflow-hidden px-6"
+      className="relative hidden h-[60vh] w-full items-center justify-center overflow-hidden px-6 sm:flex"
     >
       <div
         className={`flex flex-col items-center gap-8 transition-opacity duration-700 ease-out ${
