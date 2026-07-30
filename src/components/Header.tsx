@@ -108,10 +108,10 @@ export default function Header() {
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-6 px-6 sm:px-10 md:grid md:grid-cols-[auto_1fr_auto]">
         <Link href="/" className="flex items-center justify-self-start">
           <Image
-            src="/sejain-logo.png"
+            src="/sejain.svg"
             alt="Sejain"
-            width={1436}
-            height={484}
+            width={583}
+            height={172}
             className="h-14 w-auto"
             priority
           />

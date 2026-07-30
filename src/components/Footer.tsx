@@ -122,10 +122,10 @@ export default function Footer() {
         <div className="flex flex-col gap-6 lg:row-span-2">
           <Link href="/" className="flex items-center">
             <Image
-              src="/sejain-logo.png"
+              src="/sejain.svg"
               alt="Sejain"
-              width={1436}
-              height={484}
+              width={583}
+              height={172}
               className="h-14 w-auto"
             />
           </Link>

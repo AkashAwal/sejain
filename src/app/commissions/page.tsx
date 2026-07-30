@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import Button from "@/components/Button";
 import CTASection from "@/components/CTASection";
 import CommissionForm from "@/components/CommissionForm";
+import CommissionsGallery from "@/components/CommissionsGallery";
 
 export const metadata: Metadata = {
   title: "Commissions",
@@ -75,6 +76,19 @@ export default function CommissionsPage() {
         <Button href="#request" className="mt-8 inline-flex">
           Start a Commission
         </Button>
+      </section>
+
+      <section className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-10">
+        <p className="text-sm font-semibold uppercase tracking-widest text-primary">
+          Past Commissions
+        </p>
+        <h2 className="mt-4 max-w-3xl text-4xl font-bold uppercase leading-tight text-black sm:text-5xl">
+          A look at pieces we&rsquo;ve made for clients.
+        </h2>
+
+        <div className="mt-10">
+          <CommissionsGallery />
+        </div>
       </section>
 
       <section className="mx-auto w-full max-w-7xl px-6 py-24 sm:px-10">
