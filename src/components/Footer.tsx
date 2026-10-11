@@ -28,7 +28,6 @@ const linkGroups = [
     links: [
       { label: "Contact", href: "/contact" },
       { label: "Mail Us", href: "mailto:contact@sejain.in" },
-      { label: "Reviews", href: "/#testimonials" },
     ],
   },
 ];
