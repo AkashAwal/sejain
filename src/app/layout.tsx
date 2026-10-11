@@ -39,6 +39,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Seema Jabin Husain" }],
   creator: SITE_NAME,
   alternates: { canonical: "/" },
+  verification: { google: "Grnls8PxSvtyPWMotDm8PTJRZqy0-v-QGOpQcgTSRHY" },
   openGraph: {
     type: "website",
     locale: "en_IN",
