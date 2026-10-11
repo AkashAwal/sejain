@@ -1,4 +1,4 @@
-export const SITE_URL = "https://sejain.in";
+export const SITE_URL = "https://www.sejain.in";
 export const SITE_NAME = "Sejain Art Studio & Academy";
 export const SITE_TAGLINE =
   "Creating, Preserving & Teaching the Excellence of Fine Arts for More Than 25 Years";
